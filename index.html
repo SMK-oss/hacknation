@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>VC Brain</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    background:
+        #f3f4f6;
+
+    color:
+        #111827;
+
+}
+
+header {
+
+    background:
+        #111827;
+
+    color:
+        white;
+
+    padding:
+        22px 40px;
+
+}
+
+header h1 {
+
+    margin:
+        0;
+
+}
+
+main {
+
+    max-width:
+        1300px;
+
+    margin:
+        30px auto;
+
+    padding:
+        0 20px;
+
+}
+
+.card {
+
+    background:
+        white;
+
+    border-radius:
+        12px;
+
+    padding:
+        22px;
+
+    margin-bottom:
+        20px;
+
+    box-shadow:
+        0 2px 12px
+        rgba(0,0,0,.05);
+
+}
+
+.grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        20px;
+
+}
+
+.full {
+
+    grid-column:
+        1 / -1;
+
+}
+
+label {
+
+    display:
+        block;
+
+    margin-top:
+        12px;
+
+    margin-bottom:
+        5px;
+
+    font-weight:
+        bold;
+
+    font-size:
+        13px;
+
+}
+
+input,
+textarea,
+select {
+
+    width:
+        100%;
+
+    padding:
+        11px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius:
+        7px;
+
+}
+
+textarea {
+
+    min-height:
+        100px;
+
+}
+
+button {
+
+    padding:
+        11px 16px;
+
+    border:
+        0;
+
+    border-radius:
+        7px;
+
+    cursor:
+        pointer;
+
+    margin-top:
+        12px;
+
+    font-weight:
+        bold;
+
+}
+
+.primary {
+
+    background:
+        #111827;
+
+    color:
+        white;
+
+}
+
+.secondary {
+
+    background:
+        #e5e7eb;
+
+}
+
+.remove {
+
+    background:
+        #fee2e2;
+
+    color:
+        #991b1b;
+
+}
+
+.founder {
+
+    border:
+        1px solid #e5e7eb;
+
+    padding:
+        15px;
+
+    margin-top:
+        15px;
+
+    border-radius:
+        8px;
+
+}
+
+.row {
+
+    display:
+        flex;
+
+    gap:
+        8px;
+
+    margin-top:
+        8px;
+
+}
+
+.row input {
+
+    flex:
+        1;
+
+}
+
+.hidden {
+
+    display:
+        none;
+
+}
+
+#status {
+
+    margin-top:
+        15px;
+
+    padding:
+        15px;
+
+    background:
+        #eef2ff;
+
+    border-radius:
+        8px;
+
+}
+
+.dashboard {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap:
+        15px;
+
+}
+
+.metric {
+
+    padding:
+        18px;
+
+    background:
+        #f9fafb;
+
+    border-radius:
+        10px;
+
+}
+
+.metric strong {
+
+    display:
+        block;
+
+    font-size:
+        27px;
+
+    margin-top:
+        7px;
+
+}
+
+.decision-summary {
+
+    background:
+        #111827;
+
+    color:
+        #e5e7eb;
+
+    padding:
+        25px;
+
+    border-radius:
+        10px;
+
+    white-space:
+        pre-wrap;
+
+    line-height:
+        1.6;
+
+    font-size:
+        16px;
+
+    overflow:
+        auto;
+
+}
+
+.detail-section {
+
+    margin-top:
+        25px;
+
+}
+
+.detail-section h2 {
+
+    margin-bottom:
+        10px;
+
+}
+
+pre {
+
+    background:
+        #111827;
+
+    color:
+        #e5e7eb;
+
+    padding:
+        15px;
+
+    border-radius:
+        8px;
+
+    overflow:
+        auto;
+
+    max-height:
+        700px;
+
+    white-space:
+        pre-wrap;
+
+}
+
+@media(max-width:800px) {
+
+    .grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .dashboard {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>VC Brain</h1>
+
+<p>
+AI-first $100,000 venture investment decision system
+</p>
+
+</header>
+
+
+<main>
+
+
+<div class="grid">
+
+
+<section class="card">
+
+<h2>Company</h2>
+
+<label>Startup Name</label>
+
+<input
+id="startupName"
+placeholder="Startup name"
+>
+
+<label>Stage</label>
+
+<select id="stage">
+
+<option>Pre-seed</option>
+
+<option>Seed</option>
+
+<option>Series A</option>
+
+<option>Series B</option>
+
+<option>Growth</option>
+
+</select>
+
+<label>Sector</label>
+
+<input
+id="sector"
+placeholder="AI, FinTech, Healthcare..."
+>
+
+<label>Current Valuation</label>
+
+<input
+id="valuation"
+type="number"
+placeholder="Optional"
+>
+
+<label>Description</label>
+
+<textarea
+id="description"
+></textarea>
+
+</section>
+
+
+<section class="card">
+
+<h2>Founders</h2>
+
+<div id="founders"></div>
+
+<button
+class="secondary"
+onclick="addFounder()"
+>
++ Add Founder
+</button>
+
+</section>
+
+
+<section class="card full">
+
+<h2>Company / Product / Market Sources</h2>
+
+<p>
+Paste any URLs. Do not categorize them.
+The system will crawl and classify them automatically.
+</p>
+
+<div id="sources"></div>
+
+<button
+class="secondary"
+onclick="addSource()"
+>
++ Add Source
+</button>
+
+</section>
+
+
+<section class="card full">
+
+<h2>Documents</h2>
+
+<p>
+Upload pitch decks, milestone documents,
+financial documents, research, reports,
+or other relevant material.
+</p>
+
+<input
+type="file"
+id="documents"
+multiple
+>
+
+<div id="fileList"></div>
+
+</section>
+
+
+<section class="card full">
+
+<button
+class="primary"
+onclick="analyze()"
+>
+Analyze $100,000 Investment
+</button>
+
+<div
+id="status"
+class="hidden"
+></div>
+
+</section>
+
+
+<section
+id="results"
+class="card full hidden"
+>
+
+<h2>Investment Decision</h2>
+
+<pre
+id="decisionSummary"
+class="decision-summary"
+></pre>
+
+
+<div
+id="metrics"
+class="dashboard"
+></div>
+
+
+<div
+class="detail-section"
+>
+
+<h2>Category Scores</h2>
+
+<pre
+id="categories"
+></pre>
+
+</div>
+
+
+<div
+class="detail-section"
+>
+
+<h2>Return Model</h2>
+
+<pre
+id="returns"
+></pre>
+
+</div>
+
+
+<div
+class="detail-section"
+>
+
+<h2>Team Analysis</h2>
+
+<pre
+id="team"
+></pre>
+
+</div>
+
+
+<div
+class="detail-section"
+>
+
+<h2>Execution Timeline and Momentum</h2>
+
+<pre
+id="execution"
+></pre>
+
+</div>
+
+
+<div
+class="detail-section"
+>
+
+<h2>Competition and Switching Analysis</h2>
+
+<pre
+id="competition"
+></pre>
+
+</div>
+
+
+<div
+class="detail-section"
+>
+
+<h2>All Factor Scores</h2>
+
+<pre
+id="factors"
+></pre>
+
+</div>
+
+
+<div
+class="detail-section"
+>
+
+<h2>Full Analysis</h2>
+
+<pre
+id="raw"
+></pre>
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<script>
+
+let founderNumber = 0;
+let files = [];
+
+
+/* ============================================================
+   FOUNDERS
+============================================================ */
+
+function addFounder() {
+
+    founderNumber++;
+
+    const div = document.createElement("div");
+
+    div.className = "founder";
+
+    div.innerHTML = `
+
+        <h3>Founder ${founderNumber}</h3>
+
+        <label>Name</label>
+
+        <input
+            class="founder-name"
+            placeholder="Full name"
+        >
+
+        <label>LinkedIn</label>
+
+        <input
+            class="founder-linkedin"
+            placeholder="LinkedIn URL"
+        >
+
+        <label>Personal Website</label>
+
+        <input
+            class="founder-website"
+            placeholder="Personal website"
+        >
+
+        <label>Portfolio</label>
+
+        <input
+            class="founder-portfolio"
+            placeholder="Portfolio URL"
+        >
+
+        <label>GitHub</label>
+
+        <input
+            class="founder-github"
+            placeholder="GitHub URL"
+        >
+
+        <label>Other Founder Links</label>
+
+        <div class="other-founder-links"></div>
+
+        <button
+            class="secondary"
+            onclick="addFounderLink(this)"
+        >
+            + Add Link
+        </button>
+
+        <button
+            class="remove"
+            onclick="this.parentElement.remove()"
+        >
+            Remove Founder
+        </button>
+
+    `;
+
+    document
+        .getElementById("founders")
+        .appendChild(div);
+
+}
+
+
+function addFounderLink(button) {
+
+    const container =
+        button.parentElement.querySelector(
+            ".other-founder-links"
+        );
+
+    const row = document.createElement("div");
+
+    row.className = "row";
+
+    row.innerHTML = `
+
+        <input
+            class="other-founder"
+            placeholder="Any other founder URL"
+        >
+
+        <button
+            class="remove"
+            onclick="this.parentElement.remove()"
+        >
+            Remove
+        </button>
+
+    `;
+
+    container.appendChild(row);
+
+}
+
+
+/* ============================================================
+   SOURCES
+============================================================ */
+
+function addSource() {
+
+    const row = document.createElement("div");
+
+    row.className = "row";
+
+    row.innerHTML = `
+
+        <input
+            class="source"
+            placeholder="Company, product, competitor, market, milestone, or any other URL"
+        >
+
+        <button
+            class="remove"
+            onclick="this.parentElement.remove()"
+        >
+            Remove
+        </button>
+
+    `;
+
+    document
+        .getElementById("sources")
+        .appendChild(row);
+
+}
+
+
+/* ============================================================
+   FILES
+============================================================ */
+
+document
+    .getElementById("documents")
+    .addEventListener(
+        "change",
+        function(e) {
+
+            files = Array.from(e.target.files);
+
+            document
+                .getElementById("fileList")
+                .innerHTML =
+                    files
+                    .map(
+                        file =>
+                            `<p>📄 ${file.name}</p>`
+                    )
+                    .join("");
+
+        }
+    );
+
+
+/* ============================================================
+   COLLECT FOUNDERS
+============================================================ */
+
+function collectFounders() {
+
+    return Array.from(
+        document.querySelectorAll(".founder")
+    )
+    .map(founder => {
+
+        return {
+
+            name:
+                founder
+                .querySelector(".founder-name")
+                .value
+                .trim(),
+
+            linkedin:
+                founder
+                .querySelector(".founder-linkedin")
+                .value
+                .trim(),
+
+            personal_website:
+                founder
+                .querySelector(".founder-website")
+                .value
+                .trim(),
+
+            portfolio:
+                founder
+                .querySelector(".founder-portfolio")
+                .value
+                .trim(),
+
+            github:
+                founder
+                .querySelector(".founder-github")
+                .value
+                .trim(),
+
+            other_links:
+                Array.from(
+                    founder.querySelectorAll(
+                        ".other-founder"
+                    )
+                )
+                .map(
+                    input =>
+                        input.value.trim()
+                )
+                .filter(
+                    value =>
+                        value.length > 0
+                )
+
+        };
+
+    });
+
+}
+
+
+/* ============================================================
+   API ERROR HELPER
+============================================================ */
+
+async function getErrorMessage(response) {
+
+    try {
+
+        const data =
+            await response.json();
+
+        return data.detail
+            || "Unknown server error.";
+
+    }
+
+    catch {
+
+        return await response.text();
+
+    }
+
+}
+
+
+/* ============================================================
+   MAIN ANALYSIS
+============================================================ */
+
+async function analyze() {
+
+    const status =
+        document.getElementById("status");
+
+    const button =
+        document.querySelector(
+            "button.primary"
+        );
+
+    try {
+
+        button.disabled = true;
+
+        status.classList.remove("hidden");
+
+        status.innerText =
+            "Creating investment case...";
+
+
+        const name =
+            document
+            .getElementById("startupName")
+            .value
+            .trim();
+
+
+        if (!name) {
+
+            throw new Error(
+                "Startup name is required."
+            );
+
+        }
+
+
+        const payload = {
+
+            name:
+
+                name,
+
+            stage:
+
+                document
+                .getElementById("stage")
+                .value,
+
+            sector:
+
+                document
+                .getElementById("sector")
+                .value
+                .trim(),
+
+            valuation:
+
+                Number(
+                    document
+                    .getElementById("valuation")
+                    .value
+                )
+                || null,
+
+            description:
+
+                document
+                .getElementById("description")
+                .value
+                .trim(),
+
+            founders:
+
+                collectFounders(),
+
+            sources:
+
+                Array.from(
+                    document
+                    .querySelectorAll(".source")
+                )
+                .map(
+                    input =>
+                        input.value.trim()
+                )
+                .filter(
+                    value =>
+                        value.length > 0
+                )
+
+        };
+
+
+        /* ----------------------------------------------------
+           CREATE STARTUP
+        ---------------------------------------------------- */
+
+        const createResponse =
+            await fetch(
+                "/startups",
+                {
+
+                    method:
+                        "POST",
+
+                    headers:
+                        {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                    body:
+                        JSON.stringify(
+                            payload
+                        )
+
+                }
+            );
+
+
+        if (!createResponse.ok) {
+
+            throw new Error(
+                await getErrorMessage(
+                    createResponse
+                )
+            );
+
+        }
+
+
+        const startup =
+            await createResponse.json();
+
+
+        /* ----------------------------------------------------
+           UPLOAD DOCUMENTS
+        ---------------------------------------------------- */
+
+        for (
+            const file
+            of files
+        ) {
+
+            status.innerText =
+                `Uploading ${file.name}...`;
+
+
+            const formData =
+                new FormData();
+
+
+            formData.append(
+                "file",
+                file
+            );
+
+
+            const uploadResponse =
+                await fetch(
+                    `/startups/${startup.id}/documents`,
+                    {
+
+                        method:
+                            "POST",
+
+                        body:
+                            formData
+
+                    }
+                );
+
+
+            if (!uploadResponse.ok) {
+
+                throw new Error(
+                    await getErrorMessage(
+                        uploadResponse
+                    )
+                );
+
+            }
+
+        }
+
+
+        /* ----------------------------------------------------
+           RUN ANALYSIS
+        ---------------------------------------------------- */
+
+        status.innerText =
+            "Crawling sources, extracting evidence, analyzing the team, reconstructing execution, analyzing competition, scoring factors, and modeling the $100,000 investment...";
+
+
+        const analysisResponse =
+            await fetch(
+                "/analyze",
+                {
+
+                    method:
+                        "POST",
+
+                    headers:
+                        {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                    body:
+                        JSON.stringify({
+
+                            startup_id:
+                                startup.id
+
+                        })
+
+                }
+            );
+
+
+        if (!analysisResponse.ok) {
+
+            throw new Error(
+                await getErrorMessage(
+                    analysisResponse
+                )
+            );
+
+        }
+
+
+        const analysis =
+            await analysisResponse.json();
+
+
+        status.innerText =
+            "Investment analysis complete.";
+
+
+        displayResults(
+            analysis
+        );
+
+    }
+
+
+    catch(error) {
+
+        console.error(error);
+
+        status.innerText =
+            "ERROR: " + error.message;
+
+        status.style.background =
+            "#fee2e2";
+
+        status.style.color =
+            "#991b1b";
+
+    }
+
+
+    finally {
+
+        button.disabled = false;
+
+    }
+
+}
+
+
+/* ============================================================
+   FORMAT LIST
+============================================================ */
+
+function formatList(items) {
+
+    if (
+        !Array.isArray(items)
+        ||
+        items.length === 0
+    ) {
+
+        return "None provided.";
+
+    }
+
+    return items
+        .map(
+            item =>
+                "• " + item
+        )
+        .join("\n");
+
+}
+
+
+/* ============================================================
+   DISPLAY RESULTS
+============================================================ */
+
+function displayResults(data) {
+
+    document
+        .getElementById("results")
+        .classList
+        .remove("hidden");
+
+
+    const decision =
+        data.investment_decision
+        || {};
+
+
+    const categories =
+        data.category_scores
+        || {};
+
+
+    const returns =
+        data.return_model
+        || {};
+
+
+    /* --------------------------------------------------------
+       SCORE CALCULATIONS
+    -------------------------------------------------------- */
+
+    const founderTechnicalScores = [
+
+        categories
+        .founder
+        ?.score,
+
+        categories
+        .team
+        ?.score,
+
+        categories
+        .technology
+        ?.score
+
+    ]
+    .filter(
+        score =>
+            typeof score === "number"
+    );
+
+
+    const founderTechnicalScore =
+
+        founderTechnicalScores.length > 0
+
+        ?
+
+        Math.round(
+
+            founderTechnicalScores
+            .reduce(
+                (
+                    total,
+                    score
+                ) =>
+                    total + score,
+                0
+            )
+
+            /
+
+            founderTechnicalScores.length
+
+        )
+
+        :
+
+        0;
+
+
+    const marketScore =
+        Math.round(
+            categories
+            .market
+            ?.score
+            || 0
+        );
+
+
+    const innovationScore =
+        Math.round(
+            categories
+            .innovation
+            ?.score
+            || 0
+        );
+
+
+    const competitiveScore =
+        Math.round(
+            categories
+            .competition
+            ?.score
+            || 0
+        );
+
+
+    const evidenceConfidence =
+        Math.round(
+            categories
+            .evidence
+            ?.evidence_confidence
+            || 0
+        );
+
+
+    /* --------------------------------------------------------
+       INVESTMENT REASONS
+    -------------------------------------------------------- */
+
+    const reasonsToInvest =
+        decision
+        .top_reasons_to_invest
+        || [];
+
+
+    const reasonsNotToInvest =
+        decision
+        .top_reasons_not_to_invest
+        || [];
+
+
+    const risks =
+        decision
+        .key_risks
+        || [];
+
+
+    const diligenceQuestions =
+        decision
+        .critical_diligence_questions
+        || [];
+
+
+    const investmentReason =
+
+        reasonsToInvest.length > 0
+
+        ?
+
+        formatList(
+            reasonsToInvest
+        )
+
+        :
+
+        decision
+        .investment_thesis
+        || "No investment reason provided.";
+
+
+    const holdReason =
+
+        reasonsNotToInvest.length > 0
+
+        ?
+
+        formatList(
+            reasonsNotToInvest
+        )
+
+        :
+
+        "No major hold reason provided.";
+
+
+    const riskText =
+
+        risks.length > 0
+
+        ?
+
+        formatList(
+            risks
+        )
+
+        :
+
+        "No major risk provided.";
+
+
+    const diligenceText =
+
+        diligenceQuestions.length > 0
+
+        ?
+
+        `
+
+CRITICAL DILIGENCE QUESTIONS:
+
+${formatList(diligenceQuestions)}
+
+`
+
+        :
+
+        "";
+
+
+    /* ========================================================
+       REQUIRED OUTPUT FORMAT
+    ======================================================== */
+
+    const decisionText =
+
+`DECISION: ${decision.decision || "N/A"}
+
+OVERALL VC BRAIN SCORE: ${data.overall_score || 0}/100
+
+FOUNDER / TECHNICAL SCORE: ${founderTechnicalScore}/100
+
+MARKET SCORE: ${marketScore}/100
+
+INNOVATION SCORE: ${innovationScore}/100
+
+COMPETITIVE SCORE: ${competitiveScore}/100
+
+EVIDENCE CONFIDENCE: ${evidenceConfidence}/100
+
+
+MAIN REASON TO INVEST:
+
+${investmentReason}
+
+
+MAIN REASON TO HOLD:
+
+${holdReason}
+
+
+RISK:
+
+${riskText}
+
+
+$100,000:
+
+Expected MOIC:
+${returns.expected_moic || 0}x
+
+Expected Value:
+$${Number(
+    returns.expected_value || 0
+).toLocaleString()}
+
+Expected Profit / Loss:
+$${Number(
+    returns.expected_profit || 0
+).toLocaleString()}
+
+Probability of Loss:
+${returns.probabilities?.loss || 0}%
+
+
+${diligenceText}
+
+
+FINAL:
+
+${decision.decision || "N/A"}${
+
+    decision.decision === "INVEST"
+
+    ?
+
+    " — subject to final diligence."
+
+    :
+
+    decision.decision === "INVESTIGATE"
+
+    ?
+
+    " — continue diligence before investing."
+
+    :
+
+    decision.decision === "PASS"
+
+    ?
+
+    " — risk-adjusted return is not attractive enough."
+
+    :
+
+    ""
+
+}`;
+
+
+    document
+        .getElementById("decisionSummary")
+        .innerText =
+            decisionText;
+
+
+    /* ========================================================
+       DASHBOARD METRICS
+    ======================================================== */
+
+    document
+        .getElementById("metrics")
+        .innerHTML = `
+
+        <div class="metric">
+
+            Overall Score
+
+            <strong>
+                ${data.overall_score || 0}/100
+            </strong>
+
+        </div>
+
+
+        <div class="metric">
+
+            Probability of Loss
+
+            <strong>
+                ${returns.probabilities?.loss || 0}%
+            </strong>
+
+        </div>
+
+
+        <div class="metric">
+
+            Expected MOIC
+
+            <strong>
+                ${returns.expected_moic || 0}x
+            </strong>
+
+        </div>
+
+
+        <div class="metric">
+
+            Expected Profit
+
+            <strong>
+                $${Number(
+                    returns.expected_profit || 0
+                ).toLocaleString()}
+            </strong>
+
+        </div>
+
+    `;
+
+
+    /* ========================================================
+       DETAILED SECTIONS
+    ======================================================== */
+
+    document
+        .getElementById("categories")
+        .innerText =
+            JSON.stringify(
+                data.category_scores || {},
+                null,
+                2
+            );
+
+
+    document
+        .getElementById("returns")
+        .innerText =
+            JSON.stringify(
+                data.return_model || {},
+                null,
+                2
+            );
+
+
+    document
+        .getElementById("team")
+        .innerText =
+            JSON.stringify(
+                data.team_analysis || {},
+                null,
+                2
+            );
+
+
+    document
+        .getElementById("execution")
+        .innerText =
+            JSON.stringify(
+                data.execution_analysis || {},
+                null,
+                2
+            );
+
+
+    document
+        .getElementById("competition")
+        .innerText =
+            JSON.stringify(
+                data.competition_analysis || {},
+                null,
+                2
+            );
+
+
+    document
+        .getElementById("factors")
+        .innerText =
+            JSON.stringify(
+                data.factor_scores || {},
+                null,
+                2
+            );
+
+
+    document
+        .getElementById("raw")
+        .innerText =
+            JSON.stringify(
+                data,
+                null,
+                2
+            );
+
+
+    document
+        .getElementById("results")
+        .scrollIntoView({
+
+            behavior:
+                "smooth"
+
+        });
+
+}
+
+
+/* ============================================================
+   INITIAL UI
+============================================================ */
+
+addFounder();
+
+addSource();
+
+</script>
+
+</body>
+
+</html>
